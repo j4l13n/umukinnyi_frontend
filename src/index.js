@@ -1,14 +1,30 @@
-import 'react-app-polyfill/ie9'; // For IE 9-11 support
-import 'react-app-polyfill/stable';
+import "react-app-polyfill/ie9"; // For IE 9-11 support
+import "react-app-polyfill/stable";
 // import 'react-app-polyfill/ie11'; // For IE 11 support
-import './polyfill'
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import "./polyfill";
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import configureStore from "./redux/configureStore";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = configureStore();
+
+toast.configure({
+  autoClose: false,
+  draggable: false
+});
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
